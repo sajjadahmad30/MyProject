@@ -321,4 +321,5 @@ export {
     updateAccountDetails,
     updateUserAvatar,
     updateUserCoverImage
+    
 };
