@@ -154,8 +154,8 @@ const logoutUser = asyncHandler(async(req,res)=>{
      await User.findByIdAndUpdate(
         req.user._id,   
         {
-         $set: {
-            refreshToken: undefined
+         $unset: {
+            refreshToken: 1,
             }   
         },
         {
@@ -211,7 +211,11 @@ const refreshAccessToken = asyncHandler(async(req,res)=>{
     )
  
    } catch (error) {
-    throw new ApiError(401, error?.message || "invalid refresh token")
+    return res.status(401).json({
+        success: false,
+        message : "invalid refresh token"
+    })
+    // throw new ApiError(401, error?.message || "invalid refresh token")
    }
 }) 
 
